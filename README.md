@@ -1,2 +1,3 @@
-# sails-practice
-A project using Sails Framework
+# testProject
+
+a [Sails](http://sailsjs.org) application

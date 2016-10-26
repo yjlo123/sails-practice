@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		<%=typeof title == 'undefined' ? 'Test Project' : title%>
+	</title>
+
+	<!-- Viewport mobile tag for sensible mobile support -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!--STYLES-->
+	<link rel="stylesheet" href="/styles/angular-toastr.css">
+	<link rel="stylesheet" href="/styles/bootstrap.css">
+	<link rel="stylesheet" href="/styles/importer.css">
+	<!--STYLES END-->
+	
+</head>
+
+<body ng-app="MainModule" >
+	<div class="container-fluid">
+	<!-- Creates the navbar -->
+	<nav class="navbar navbar-default navbar-inverse" ng-controller="NavBarController">
+		
+		<!-- This creates the mechanism for the collapse button -->
+			<button type="button" class="navbar-toggle" data-toggle="collapse" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+
+				<!-- This controls the number of lines in the image when the nav collapse -->
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+
+		<!-- This is the brand on the left-hand side. -->
+		<a class="navbar-brand" href="/#">TestProject</a>
+		<div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+			<div ng-cloak ng-show="!loggedin">
+				<!-- LOGIN FORM -->
+				<form ng-submit="submitLoginForm()" class="navbar-form navbar-right">
+
+					<!-- E M A I L -->
+					<div class="form-group">
+						<input ng-model="loginForm.email" type="text" placeholder="Email" name="email" class="form-control">
+					</div>
+
+					<!-- P A S S W O R D -->
+					<div class="form-group">
+						<input ng-model="loginForm.password" type="password" placeholder="Password" name="password" class="form-control">
+					</div>
+
+					<!-- S U B M I T -->
+					<button type="submit" class="btn btn-success">
+						<span ng-show="!loginForm.loading">Sign in</span>
+						<span ng-show="loginForm.loading" class="fa fa-spinner"></span>
+						<span ng-show="loginForm.loading">Signing in...</span>
+					</button>
+					<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+				</form>
+			</div>
+			<ul class="nav navbar-nav navbar-right" ng-cloak ng-show="loggedin">
+				<li><a href="#" ng-bind="me.name"></a></li>
+				<li>
+				<a href="/logout">Sign out</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	</div>
+	<%- body %>
+		<div class="container">
+			<hr>
+			<footer class="footer">
+				<div class="pull-right">
+					<a href="http://liusiwei.com">liusiwei.com</a>
+					<div>
+						Siwei's test project
+					</div>
+				</div>
+			</footer>
+		</div>
+
+
+		<!--
+		Client-side Templates
+		========================
+		By default, your Gruntfile is configured to automatically load and precompile
+		client-side JST templates in your `assets/templates` folder, then
+		include them here automatically (between TEMPLATES and TEMPLATES END).
+
+		To customize this behavior to fit your needs, just edit `tasks/pipeline.js`.
+		For example, here are a few things you could do:
+
+			+ Import templates from other directories
+			+ Use a different template engine (handlebars, jade, dust, etc.)
+			+ Internationalize your client-side templates using a server-side
+			  stringfile before they're served.
+	-->
+
+		<!--TEMPLATES-->
+		
+		<!--TEMPLATES END-->
+
+
+	<!--
+	  Client-side Javascript
+	  ========================
+	  To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+	  For example, here are a few things you could do:
+
+		  + Change the order of your scripts
+		  + Import scripts from other directories
+		  + Use a different preprocessor, like TypeScript
+	-->
+
+		<!--SCRIPTS-->
+		<script src="/js/dependencies/sails.io.js"></script>
+		<script src="/js/dependencies/angular.js"></script>
+		<script src="/js/dependencies/angular-toastr.js"></script>
+		<script src="/js/dependencies/compareTo.module.js"></script>
+		<script src="/js/public/jquery.js"></script>
+		<script src="/js/public/MainModule.js"></script>
+		<script src="/js/private/dashboard/DashboardController.js"></script>
+		<script src="/js/public/bootstrap.js"></script>
+		<script src="/js/public/homepage/NavBarController.js"></script>
+		<script src="/js/public/signup/SignupController.js"></script>
+		<!--SCRIPTS END-->
+</body>
+
+</html>
